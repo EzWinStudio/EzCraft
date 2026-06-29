@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CraftManya - Minecraft Sunucusu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- Üst Kısım (Header) -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>CraftManya Network</h1>
+            <p>Sınırları zorlayan hayatta kalma deneyimi!</p>
+            <div class="ip-box" onclick="kopyalaIP()">
+                <span id="ip-text">play.craftmanya.com</span>
+                <span class="copy-hint">(Kopyalamak için tıkla)</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Özellikler Kısmı -->
+    <section class="features">
+        <div class="feature-card">
+            <h3>Sıfır Gecikme (Lag)</h3>
+            <p>Güçlü sunucu altyapımız sayesinde kesintisiz oyun keyfi.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Özel Eşyalar</h3>
+            <p>Sadece bizim sunucumuza özel craftlanabilir efsanevi kılıçlar ve zırhlar.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Aktif Yönetim</h3>
+            <p>Oyun içi hile koruması ve 7/24 aktif yetkili kadrosu.</p>
+        </div>
+    </section>
+
+    <!-- İletişim / Topluluk Kısmı -->
+    <section class="community">
+        <h2>Topluluğumuza Katıl</h2>
+        <p>Gelişmelerden haberdar olmak ve diğer oyuncularla sohbet etmek için Discord sunucumuza gel!</p>
+        <a href="https://discord.gg/senindiscordlinkin" target="_blank" class="discord-btn">Discord'a Katıl</a>
+    </section>
+
+    <!-- Alt Kısım (Footer) -->
+    <footer>
+        <p>&copy; 2026 CraftManya Network. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <!-- JavaScript (IP Kopyalama İşlevi İçin) -->
+    <script>
+        function kopyalaIP() {
+            var ip = "play.craftmanya.com";
+            navigator.clipboard.writeText(ip);
+            alert("Sunucu IP adresi kopyalandı: " + ip);
+        }
+    </script>
+</body>
+</html>
