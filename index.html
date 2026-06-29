@@ -3,57 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CraftManya - Minecraft Sunucusu</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Minecraft Sunucusu</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* GENEL AYARLAR */
+        :root {
+            --bg-main: #0a0a0a;
+            --bg-card: #141414;
+            --primary: #5c5dfa;
+            --primary-hover: #4a4be5;
+            --text-light: #ffffff;
+            --text-muted: #a1a1aa;
+            --border-color: #27272a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* NAVBAR (Menü) */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: rgba(10, 10, 10, 0.9);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo { font-size: 24px; font-weight: 800; color: var(--primary); font-style: italic; }
+        .nav-links { display: flex; gap: 20px; font-size: 14px; font-weight: 600; color: var(--text-muted); }
+        .nav-links a:hover { color: var(--text-light); }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon-btn {
+            background: transparent; border: 1px solid var(--border-color);
+            color: var(--text-light); padding: 10px; border-radius: 8px; cursor: pointer;
+        }
+        .btn-primary {
+            background-color: var(--primary); color: white; border: none;
+            padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s;
+        }
+        .btn-primary:hover { background-color: var(--primary-hover); }
+        
+        .btn-secondary {
+            background-color: #27272a; color: white; border: none;
+            padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s;
+        }
+        .btn-secondary:hover { background-color: #3f3f46; }
+
+        /* HERO BÖLÜMÜ (Ana Ekran) */
+        .hero {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            /* Arka plan resmi ve ızgara (grid) efekti */
+            background: linear-gradient(rgba(10,10,10,0.7), rgba(10,10,10,0.9)), 
+                        url('https://images.unsplash.com/photo-1605636367586-eb101e0a2dce?q=80&w=2070') center/cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+        .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin-bottom: 30px; }
+
+        .ip-btn {
+            background-color: var(--primary); color: white; font-size: 1rem;
+            padding: 15px 30px; border-radius: 8px; border: none; cursor: pointer;
+            display: flex; align-items: center; gap: 10px; font-weight: 600; transition: 0.3s;
+        }
+        .ip-btn:hover { background-color: var(--primary-hover); transform: scale(1.05); }
+
+        /* BİLGİ KARTLARI */
+        .info-section {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 50px 5%;
+            flex-wrap: wrap;
+        }
+
+        .info-card {
+            background-color: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 20px; flex: 1; min-width: 300px;
+        }
+        
+        .info-card.blue-card {
+            background-color: var(--primary); border: none; color: white; cursor: pointer; transition: 0.3s;
+        }
+        .info-card.blue-card:hover { background-color: var(--primary-hover); }
+
+        .info-icon {
+            background-color: rgba(255,255,255,0.1); width: 50px; height: 50px;
+            display: flex; justify-content: center; align-items: center; border-radius: 10px; font-size: 20px;
+        }
+
+        .social-icons {
+            display: flex; gap: 15px; justify-content: center; align-items: center; flex: 1; min-width: 300px;
+        }
+        .social-btn {
+            background-color: var(--bg-card); border: 1px solid var(--border-color); color: white;
+            width: 60px; height: 60px; display: flex; justify-content: center; align-items: center;
+            border-radius: 12px; font-size: 24px; cursor: pointer; transition: 0.3s;
+        }
+        .social-btn:hover { background-color: #27272a; }
+
+        /* HABERLER */
+        .news-section { padding: 50px 5%; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .section-header h2 { font-size: 1.5rem; }
+        .section-header a { color: var(--primary); font-weight: 600; font-size: 0.9rem; }
+
+        .empty-news {
+            background-color: var(--bg-card); border: 1px dashed var(--border-color);
+            border-radius: 12px; padding: 60px 20px; text-align: center; color: var(--text-muted);
+        }
+        .empty-news i { font-size: 30px; margin-bottom: 15px; background: #1f1f22; padding: 15px; border-radius: 10px; }
+        .empty-news h3 { color: white; margin-bottom: 10px; }
+
+        /* SSS (Sıkça Sorulan Sorular) */
+        .faq-section {
+            display: flex; padding: 80px 5%; gap: 50px; border-top: 1px solid var(--border-color); flex-wrap: wrap;
+        }
+        .faq-left { flex: 1; min-width: 300px; }
+        .faq-left h2 { font-size: 3.5rem; line-height: 1; margin-bottom: 20px; }
+        .faq-left p { color: var(--text-muted); }
+
+        .faq-right { flex: 2; min-width: 300px; }
+        .faq-item { border-bottom: 1px solid var(--border-color); padding: 20px 0; }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.1rem; cursor: pointer; }
+        .faq-answer { display: none; padding-top: 15px; color: var(--text-muted); font-size: 0.95rem; }
+
+        /* DESTEK BÖLÜMÜ */
+        .support-banner {
+            background: linear-gradient(rgba(10,10,10,0.8), rgba(10,10,10,0.8)), 
+                        url('https://images.unsplash.com/photo-1622618991746-fe6004db3a47?q=80&w=2070') center/cover;
+            padding: 80px 20px; text-align: center; border-top: 1px solid var(--border-color);
+        }
+        .support-banner h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        .support-banner p { color: var(--text-muted); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--bg-card); padding: 50px 5%; border-top: 1px solid var(--border-color);
+            display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px;
+        }
+        .footer-col h4 { margin-bottom: 20px; font-size: 1.1rem; }
+        .footer-col ul li { margin-bottom: 10px; color: var(--text-muted); font-size: 0.9rem; cursor: pointer; }
+        .footer-col ul li:hover { color: white; }
+        .footer-bottom { width: 100%; text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.8rem; }
+    </style>
 </head>
 <body>
 
-    <!-- Üst Kısım (Header) -->
-    <header class="hero">
-        <div class="hero-content">
-            <h1>CraftManya Network</h1>
-            <p>Sınırları zorlayan hayatta kalma deneyimi!</p>
-            <div class="ip-box" onclick="kopyalaIP()">
-                <span id="ip-text">play.craftmanya.com</span>
-                <span class="copy-hint">(Kopyalamak için tıkla)</span>
-            </div>
+    <nav>
+        <div class="nav-left">
+            <div class="logo"><i class="fa-solid fa-bolt"></i> SunucuAdı</div>
+            <ul class="nav-links">
+                <li><a href="#">Ana Sayfa</a></li>
+                <li><a href="#">Mağaza</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Wiki</a></li>
+                <li><a href="#">Harita</a></li>
+            </ul>
         </div>
+        <div class="nav-right">
+            <button class="icon-btn"><i class="fa-solid fa-moon"></i></button>
+            <button class="btn-primary">Giriş Yap</button>
+            <button class="btn-secondary">Kayıt Ol</button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Kasabanı kur,<br>imparatorluğunu büyüt</h1>
+        <p>BoxPvP baskınlarından Towny'nin oyuncu yönetimli kasaba ve uluslarına, kendi hikayeni yaz. Türkiye'nin oyuncu odaklı Minecraft sunucusuna bağlan.</p>
+        <button class="ip-btn" onclick="kopyalaIP()">
+            <span id="ip-text">oyna.seninsunucun.com</span>
+            <i class="fa-regular fa-copy"></i>
+        </button>
     </header>
 
-    <!-- Özellikler Kısmı -->
-    <section class="features">
-        <div class="feature-card">
-            <h3>Sıfır Gecikme (Lag)</h3>
-            <p>Güçlü sunucu altyapımız sayesinde kesintisiz oyun keyfi.</p>
+    <section class="info-section">
+        <div class="info-card">
+            <div class="info-icon"><i class="fa-solid fa-users"></i></div>
+            <div>
+                <div style="font-size: 12px; color: var(--text-muted);">Sunucu Bilgileri</div>
+                <div style="font-weight: 600;">128 aktif oyuncu çevrimiçi</div>
+            </div>
         </div>
-        <div class="feature-card">
-            <h3>Özel Eşyalar</h3>
-            <p>Sadece bizim sunucumuza özel craftlanabilir efsanevi kılıçlar ve zırhlar.</p>
+        
+        <div class="info-card blue-card">
+            <div class="info-icon" style="background-color: rgba(255,255,255,0.2);"><i class="fa-brands fa-discord"></i></div>
+            <div style="flex-grow: 1;">
+                <div style="font-size: 12px;">Discord Sunucusu</div>
+                <div style="font-weight: 600;">Diğer 323 oyuncuyla tanışın.</div>
+            </div>
+            <i class="fa-solid fa-arrow-right"></i>
         </div>
-        <div class="feature-card">
-            <h3>Aktif Yönetim</h3>
-            <p>Oyun içi hile koruması ve 7/24 aktif yetkili kadrosu.</p>
+
+        <div class="social-icons">
+            <a href="#" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-discord"></i></a>
         </div>
     </section>
 
-    <!-- İletişim / Topluluk Kısmı -->
-    <section class="community">
-        <h2>Topluluğumuza Katıl</h2>
-        <p>Gelişmelerden haberdar olmak ve diğer oyuncularla sohbet etmek için Discord sunucumuza gel!</p>
-        <a href="https://discord.gg/senindiscordlinkin" target="_blank" class="discord-btn">Discord'a Katıl</a>
+    <section class="news-section">
+        <div class="section-header">
+            <h2>Son Haberler</h2>
+            <a href="#">Tümünü Gör <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="empty-news">
+            <i class="fa-regular fa-newspaper"></i>
+            <h3>Henüz blog gönderisi yok.</h3>
+            <p>Yeni duyurular, yama notları ve haberler yakında burada görünecek — birazdan tekrar uğrayın.</p>
+        </div>
     </section>
 
-    <!-- Alt Kısım (Footer) -->
+    <section class="faq-section">
+        <div class="faq-left">
+            <h2>Sıkça<br>Sorulan<br>Sorular</h2>
+            <p>Sunucuya katılmadan önce en çok merak edilen konuları burada topladık.</p>
+        </div>
+        <div class="faq-right">
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">Sunucuya nasıl katılırım? <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">Minecraft Java Edition istemcini aç, çok oyunculu bölümüne oyna.seninsunucun.com adresini ekle ve doğrudan bağlan.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">Hangi Minecraft sürümleri destekleniyor? <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">Sunucumuz 1.16.5 ile 1.20.4 arası tüm sürümleri desteklemektedir. Ancak en iyi deneyim için son sürümü tavsiye ederiz.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">Satın aldığım ürün hesabıma ne zaman geçer? <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">Mağazadan yaptığınız alışverişler genellikle anında oyun içi hesabınıza tanımlanır. Yoğunluğa bağlı olarak 5 dakika sürebilir.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">Bir sorun yaşarsam nereden yardım alabilirim? <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">Discord sunucumuza katılarak destek talebi açabilir veya rehberler kanalımızı inceleyebilirsiniz.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="support-banner">
+        <h2>Takıldığın yerde ekip yanında.</h2>
+        <p>Ödeme, hesap veya sunucuyla ilgili bir sorun mu var? Discord'da destek talebi aç, ekran görüntünü ekle; ekibimiz en kısa sürede yanıtlasın.</p>
+        <button class="btn-primary" style="margin-top: 15px;"><i class="fa-regular fa-circle-question"></i> Discord'da destek talebi aç <i class="fa-solid fa-arrow-right"></i></button>
+    </section>
+
     <footer>
-        <p>&copy; 2026 CraftManya Network. Tüm hakları saklıdır.</p>
+        <div class="footer-col" style="max-width: 250px;">
+            <div class="logo" style="margin-bottom: 10px;"><i class="fa-solid fa-bolt"></i> SunucuAdı</div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Türk Minecraft sunucusu.<br>&copy; 2026 Tüm hakları saklıdır.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Hızlı Linkler</h4>
+            <ul>
+                <li>Ana Sayfa</li>
+                <li>Mağaza</li>
+                <li>Blog</li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Destek</h4>
+            <ul>
+                <li>Wiki</li>
+                <li>Kurallar</li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Kurumsal</h4>
+            <ul>
+                <li>Gizlilik Politikası</li>
+                <li>Hizmet Şartları</li>
+                <li>İade Politikası</li>
+            </ul>
+        </div>
+        
+        <div class="footer-bottom">
+            Sunucumuz is not affiliated with Mojang AB or Microsoft. İletişim: contact@seninsunucun.com
+        </div>
     </footer>
 
-    <!-- JavaScript (IP Kopyalama İşlevi İçin) -->
     <script>
+        // IP Kopyalama Fonksiyonu
         function kopyalaIP() {
-            var ip = "play.craftmanya.com";
+            var ip = document.getElementById("ip-text").innerText;
             navigator.clipboard.writeText(ip);
-            alert("Sunucu IP adresi kopyalandı: " + ip);
+            
+            var btn = document.querySelector(".ip-btn");
+            var originalText = btn.innerHTML;
+            
+            // Kopyalandı efekti
+            btn.innerHTML = `<i class="fa-solid fa-check"></i> IP Kopyalandı!`;
+            btn.style.backgroundColor = "#2ecc71"; // Yeşil renk
+            
+            setTimeout(function() {
+                btn.innerHTML = originalText;
+                btn.style.backgroundColor = "var(--primary)"; // Eski renge dön
+            }, 2000);
+        }
+
+        // SSS (Akordeon) Açma Kapama Fonksiyonu
+        function toggleFAQ(element) {
+            var answer = element.querySelector('.faq-answer');
+            var icon = element.querySelector('i');
+            
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+                icon.style.transform = "rotate(0deg)";
+            } else {
+                answer.style.display = "block";
+                icon.style.transform = "rotate(180deg)";
+            }
         }
     </script>
 </body>
