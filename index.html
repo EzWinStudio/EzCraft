@@ -3,386 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EzCraft - Yeni Sezon</title>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome (İkonlar için) -->
+    <title>EzCraft - Modern Minecraft</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* GENEL AYARLAR */
         :root {
-            /* Arka plan kartları animasyon görünsün diye hafif saydam yapıldı */
-            --bg-card: rgba(20, 20, 25, 0.6); 
-            --primary: #5c5dfa;
-            --primary-hover: #4a4be5;
+            --bg-card: rgba(255, 255, 255, 0.05);
             --text-light: #ffffff;
-            --text-muted: #a1a1aa;
-            --border-color: rgba(255, 255, 255, 0.1);
+            --text-muted: #cccccc;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
 
-        /* ANİMASYONLU ARKA PLAN EFEKTİ */
+        /* SİYAH-BEYAZ ANİMASYONLU ARKA PLAN */
         body {
-            /* Koyu ve şık renk tonları arasında geçiş yapan animasyon */
-            background: linear-gradient(-45deg, #0a0a0a, #111827, #1e1b4b, #0f172a);
-            background-size: 400% 400%;
-            animation: gradientAnim 15s ease infinite;
+            background: linear-gradient(125deg, #000000, #222222, #000000, #333333);
+            background-size: 300% 300%;
+            animation: monoGradient 10s ease infinite;
             color: var(--text-light);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
-        @keyframes gradientAnim {
+        @keyframes monoGradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
-
-        /* NAVBAR (Menü) - Cam Efektli */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background-color: rgba(10, 10, 10, 0.5);
-            backdrop-filter: blur(10px); /* Arka planı bulanıklaştırır */
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .logo { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            font-size: 24px; 
-            font-weight: 800; 
-            color: var(--text-light); 
-        }
+        /* YAZI SÜSLEMELERİ */
+        h1, h2 { text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        .logo { font-size: 32px; font-weight: 900; }
         
-        .logo img {
-            height: 40px;
-            border-radius: 8px;
-        }
-
-        .nav-links { display: flex; gap: 20px; font-size: 14px; font-weight: 600; color: var(--text-muted); }
-        .nav-links a:hover { color: var(--text-light); }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .icon-btn {
-            background: transparent; border: 1px solid var(--border-color);
-            color: var(--text-light); padding: 10px; border-radius: 8px; cursor: pointer;
-            backdrop-filter: blur(5px);
-        }
-
-        /* HERO BÖLÜMÜ (Ana Ekran) */
-        .hero {
-            height: 70vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            background: transparent; /* RESİM KALDIRILDI */
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .hero h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
-        .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin-bottom: 30px; }
-
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 10%; backdrop-filter: blur(5px); }
+        .nav-links { display: flex; gap: 30px; font-weight: 700; color: var(--text-muted); }
+        
+        .hero { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .hero h1 { font-size: 4.5rem; margin-bottom: 20px; }
+        
         .ip-btn {
-            background-color: var(--primary); color: white; font-size: 1rem;
-            padding: 15px 30px; border-radius: 8px; border: none; cursor: pointer;
-            display: flex; align-items: center; gap: 10px; font-weight: 600; transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(92, 93, 250, 0.3);
+            background: transparent; color: white; border: 2px solid white;
+            padding: 15px 40px; font-size: 1.2rem; cursor: pointer; transition: 0.5s;
         }
-        .ip-btn:hover { background-color: var(--primary-hover); transform: scale(1.05); }
+        .ip-btn:hover { background: white; color: black; }
 
-        /* BİLGİ KARTLARI */
-        .info-section {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 50px 5%;
-            flex-wrap: wrap;
-        }
+        .info-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 20px; backdrop-filter: blur(10px); }
 
-        .info-card {
-            background-color: var(--bg-card); 
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
-            padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 20px; flex: 1; min-width: 300px;
-        }
-        
-        .info-card.blue-card {
-            background-color: var(--primary); border: none; color: white; cursor: pointer; transition: 0.3s;
-        }
-        .info-card.blue-card:hover { background-color: var(--primary-hover); }
+        /* SSS SÜSLEMELERİ */
+        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 25px 0; }
+        .faq-question { font-size: 1.3rem; font-weight: 700; display: flex; justify-content: space-between; }
 
-        .info-icon {
-            background-color: rgba(255,255,255,0.1); width: 50px; height: 50px;
-            display: flex; justify-content: center; align-items: center; border-radius: 10px; font-size: 20px;
-        }
-
-        .social-icons {
-            display: flex; gap: 15px; justify-content: center; align-items: center; flex: 1; min-width: 300px;
-        }
-        .social-btn {
-            background-color: var(--bg-card); 
-            border: 1px solid var(--border-color); color: white;
-            backdrop-filter: blur(10px);
-            width: 60px; height: 60px; display: flex; justify-content: center; align-items: center;
-            border-radius: 12px; font-size: 24px; cursor: pointer; transition: 0.3s;
-        }
-        .social-btn:hover { background-color: #5865F2; border-color: #5865F2; }
-
-        /* HABERLER */
-        .news-section { padding: 50px 5%; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .section-header h2 { font-size: 1.5rem; }
-        .section-header a { color: var(--primary); font-weight: 600; font-size: 0.9rem; }
-
-        .empty-news {
-            background-color: var(--bg-card); border: 1px dashed var(--border-color);
-            backdrop-filter: blur(10px);
-            border-radius: 12px; padding: 60px 20px; text-align: center; color: var(--text-muted);
-        }
-        .empty-news i { font-size: 30px; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; }
-        .empty-news h3 { color: white; margin-bottom: 10px; }
-
-        /* SSS (Sıkça Sorulan Sorular) */
-        .faq-section {
-            display: flex; padding: 80px 5%; gap: 50px; border-top: 1px solid var(--border-color); flex-wrap: wrap;
-        }
-        .faq-left { flex: 1; min-width: 300px; }
-        .faq-left h2 { font-size: 3.5rem; line-height: 1; margin-bottom: 20px; }
-        .faq-left p { color: var(--text-muted); }
-
-        .faq-right { flex: 2; min-width: 300px; }
-        .faq-item { border-bottom: 1px solid var(--border-color); padding: 20px 0; }
-        .faq-question { display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.1rem; cursor: pointer; }
-        .faq-answer { display: none; padding-top: 15px; color: var(--text-muted); font-size: 0.95rem; }
-
-        /* DESTEK BÖLÜMÜ */
-        .support-banner {
-            background-color: rgba(10, 10, 10, 0.4); /* RESİM KALDIRILDI, SAYDAM YAPILDI */
-            backdrop-filter: blur(8px);
-            padding: 80px 20px; text-align: center; border-top: 1px solid var(--border-color);
-        }
-        .support-banner h2 { font-size: 2.5rem; margin-bottom: 15px; }
-        .support-banner p { color: var(--text-muted); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        
-        .btn-primary {
-            background-color: var(--primary); color: white; border: none;
-            padding: 12px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s;
-        }
-        .btn-primary:hover { background-color: var(--primary-hover); }
-
-        /* FOOTER */
-        footer {
-            background-color: rgba(10, 10, 10, 0.6); 
-            backdrop-filter: blur(10px);
-            padding: 50px 5%; border-top: 1px solid var(--border-color);
-            display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px;
-        }
-        .footer-col h4 { margin-bottom: 20px; font-size: 1.1rem; }
-        .footer-col ul li { margin-bottom: 10px; color: var(--text-muted); font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
-        .footer-col ul li:hover { color: white; }
-        .footer-bottom { width: 100%; text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.8rem; }
+        footer { padding: 50px 10%; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
     </style>
 </head>
 <body>
 
-    <!-- Üst Menü -->
     <nav>
-        <div class="nav-left">
-            <div class="logo">
-                <img src="Descargar Vectores, Imágenes, Fotos y Videos Gratis.jpg" alt="EzCraft Logo">
-                EzCraft
-            </div>
-            <ul class="nav-links">
-                <li><a href="#">Ana Sayfa</a></li>
-                <li><a href="#">Mağaza</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Wiki</a></li>
-                <li><a href="#">Harita</a></li>
-            </ul>
-        </div>
-        <div class="nav-right">
-            <button class="icon-btn"><i class="fa-solid fa-moon"></i></button>
-        </div>
+        <div class="logo">EzCraft</div>
+        <ul class="nav-links">
+            <li>ANA SAYFA</li>
+            <li>MAĞAZA</li>
+            <li>BLOG</li>
+            <li>WIKI</li>
+        </ul>
     </nav>
 
-    <!-- Ana Ekran (Hero) -->
     <header class="hero">
-        <h1>Kasabanı kur,<br>imparatorluğunu büyüt</h1>
-        <p>BoxPvP baskınlarından Towny'nin oyuncu yönetimli kasaba ve uluslarına, kendi hikayeni yaz. Türkiye'nin oyuncu odaklı Minecraft sunucusuna bağlan.</p>
-        <button class="ip-btn" onclick="kopyalaIP()">
-            <span id="ip-text">EzTaczcraft.aternos.me</span>
-            <i class="fa-regular fa-copy"></i>
+        <h1>GELECEĞİN<br>KRALLIĞINI KUR</h1>
+        <p>Eşsiz sistemler ve sınırsız macera. Hemen aramıza katıl.</p>
+        <br>
+        <button class="ip-btn" onclick="navigator.clipboard.writeText('EzTaczcraft.aternos.me')">
+            EzTaczcraft.aternos.me
         </button>
     </header>
 
-    <!-- Bilgi ve Sosyal Medya Kartları -->
-    <section class="info-section">
+    <section style="padding: 50px 10%;">
         <div class="info-card">
-            <div class="info-icon"><i class="fa-solid fa-users"></i></div>
-            <div>
-                <div style="font-size: 12px; color: var(--text-muted);">Sunucu Bilgileri</div>
-                <div style="font-weight: 600;">128 aktif oyuncu çevrimiçi</div>
-            </div>
-        </div>
-        
-        <div class="info-card blue-card" onclick="window.open('https://discord.gg/C9j5expAX', '_blank')">
-            <div class="info-icon" style="background-color: rgba(255,255,255,0.2);"><i class="fa-brands fa-discord"></i></div>
-            <div style="flex-grow: 1;">
-                <div style="font-size: 12px;">Discord Sunucusu</div>
-                <div style="font-weight: 600;">Topluluğumuza Katılın</div>
-            </div>
-            <i class="fa-solid fa-arrow-right"></i>
-        </div>
-
-        <div class="social-icons">
-            <a href="https://discord.gg/C9j5expAX" target="_blank" class="social-btn" title="Discord Sunucumuz"><i class="fa-brands fa-discord"></i></a>
+            <h2>Sunucu Durumu</h2>
+            <p>128 Aktif Oyuncu Çevrimiçi</p>
         </div>
     </section>
 
-    <!-- Son Haberler -->
-    <section class="news-section">
-        <div class="section-header">
-            <h2>Son Haberler</h2>
-            <a href="#">Tümünü Gör <i class="fa-solid fa-arrow-right"></i></a>
+    <section style="padding: 50px 10%;">
+        <h2>SIKÇA SORULANLAR</h2>
+        <div class="faq-item">
+            <div class="faq-question">Nasıl giriş yaparım? <i class="fa-solid fa-plus"></i></div>
         </div>
-        <div class="empty-news">
-            <i class="fa-regular fa-newspaper"></i>
-            <h3>Henüz blog gönderisi yok.</h3>
-            <p>Yeni duyurular, yama notları ve haberler yakında burada görünecek — birazdan tekrar uğrayın.</p>
+        <div class="faq-item">
+            <div class="faq-question">Destek nereden alınır? <i class="fa-solid fa-plus"></i></div>
         </div>
     </section>
 
-    <!-- SSS -->
-    <section class="faq-section">
-        <div class="faq-left">
-            <h2>Sıkça<br>Sorulan<br>Sorular</h2>
-            <p>Sunucuya katılmadan önce en çok merak edilen konuları burada topladık.</p>
-        </div>
-        <div class="faq-right">
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">Sunucuya nasıl katılırım? <i class="fa-solid fa-chevron-down"></i></div>
-                <div class="faq-answer">Minecraft Java Edition istemcini aç, çok oyunculu bölümüne EzTaczcraft.aternos.me adresini ekle ve doğrudan bağlan.</div>
-            </div>
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">Hangi Minecraft sürümleri destekleniyor? <i class="fa-solid fa-chevron-down"></i></div>
-                <div class="faq-answer">Sunucumuz 1.16.5 ile 1.20.4 arası tüm sürümleri desteklemektedir. Ancak en iyi deneyim için son sürümü tavsiye ederiz.</div>
-            </div>
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">Bir sorun yaşarsam nereden yardım alabilirim? <i class="fa-solid fa-chevron-down"></i></div>
-                <div class="faq-answer">Discord sunucumuza katılarak destek talebi açabilir veya rehberler kanalımızı inceleyebilirsiniz.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Destek Banner -->
-    <section class="support-banner">
-        <h2>Takıldığın yerde ekip yanında.</h2>
-        <p>Ödeme, hesap veya sunucuyla ilgili bir sorun mu var? Discord'da destek talebi aç, ekran görüntünü ekle; ekibimiz en kısa sürede yanıtlasın.</p>
-        <a href="https://discord.gg/C9j5expAX" target="_blank" class="btn-primary" style="margin-top: 15px; display: inline-block;"><i class="fa-regular fa-circle-question"></i> Discord'da destek talebi aç <i class="fa-solid fa-arrow-right"></i></a>
-    </section>
-
-    <!-- Footer -->
     <footer>
-        <div class="footer-col" style="max-width: 250px;">
-            <div class="logo" style="margin-bottom: 10px;">
-                <img src="Descargar Vectores, Imágenes, Fotos y Videos Gratis.jpg" alt="EzCraft Logo">
-                EzCraft
-            </div>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Türk Minecraft sunucusu.<br>&copy; 2026 Tüm hakları saklıdır.</p>
-        </div>
-        <div class="footer-col">
-            <h4>Hızlı Linkler</h4>
-            <ul>
-                <li>Ana Sayfa</li>
-                <li>Mağaza</li>
-                <li>Blog</li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h4>Destek</h4>
-            <ul>
-                <li>Wiki</li>
-                <li>Kurallar</li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h4>Kurumsal</h4>
-            <ul>
-                <li>Gizlilik Politikası</li>
-                <li>Hizmet Şartları</li>
-            </ul>
-        </div>
-        
-        <div class="footer-bottom">
-            EzCraft is not affiliated with Mojang AB or Microsoft.
-        </div>
+        <p>&copy; 2026 EzCraft - Tüm Hakları Saklıdır.</p>
     </footer>
 
-    <!-- JavaScript Kodları -->
-    <script>
-        // IP Kopyalama Fonksiyonu
-        function kopyalaIP() {
-            var ip = document.getElementById("ip-text").innerText;
-            navigator.clipboard.writeText(ip);
-            
-            var btn = document.querySelector(".ip-btn");
-            var originalText = btn.innerHTML;
-            
-            // Kopyalandı efekti
-            btn.innerHTML = `<i class="fa-solid fa-check"></i> IP Kopyalandı!`;
-            btn.style.backgroundColor = "#2ecc71"; // Yeşil renk
-            
-            setTimeout(function() {
-                btn.innerHTML = originalText;
-                btn.style.backgroundColor = "var(--primary)"; // Eski renge dön
-            }, 2000);
-        }
-
-        // SSS (Akordeon) Açma Kapama Fonksiyonu
-        function toggleFAQ(element) {
-            var answer = element.querySelector('.faq-answer');
-            var icon = element.querySelector('i');
-            
-            if (answer.style.display === "block") {
-                answer.style.display = "none";
-                icon.style.transform = "rotate(0deg)";
-            } else {
-                answer.style.display = "block";
-                icon.style.transform = "rotate(180deg)";
-            }
-        }
-    </script>
 </body>
 </html>
