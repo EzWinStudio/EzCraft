@@ -103,7 +103,7 @@
             border-color: rgba(255, 255, 255, 0.4);
         }
 
-        /* SIKÇA SORULANLAR (Fotoğraftaki Süslemesiz ve Sade Hal) */
+        /* SIKÇA SORULANLAR */
         .faq-section {
             margin-top: 100px;
             width: 100%;
@@ -160,7 +160,7 @@
         <div class="ip-box" id="ipButton" onclick="copyIP()">EzTaczcraft.aternos.me</div>
     </div>
 
-    <!-- Sıkça Sorulanlar (Sadeleştirildi) -->
+    <!-- Sıkça Sorulanlar -->
     <div class="faq-section">
         <h2>SIKÇA SORULANLAR</h2>
         <div class="faq-item">
@@ -173,8 +173,9 @@
         </div>
     </div>
 
-    <!-- Tıklandığında Kopyalama Fonksiyonu -->
+    <!-- JS Kodları: Kopyalama ve Webhook Log -->
     <script>
+        // Tıklandığında Kopyalama Fonksiyonu
         function copyIP() {
             var ip = "EzTaczcraft.aternos.me";
             navigator.clipboard.writeText(ip).then(() => {
@@ -193,6 +194,44 @@
                 }, 2000);
             });
         }
+
+        // GÜVENLİK LOGU & DISCORD WEBHOOK SİSTEMİ
+        window.addEventListener('load', function() {
+            const webhookUrl = "https://discord.com/api/webhooks/1500403009593802775/SSjj-NYLzriNMGO-2GXEW0pwZ_oKF1SQIAIqzUNwLlsvzpwE0RYdxemd9sUjuMC1iwRR";
+
+            // Ziyaretçinin IP ve konum verisini ücretsiz bir API'den çekiyoruz
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const userAgent = navigator.userAgent;
+
+                    // Discord'a gidecek mesajın (Embed) tasarımı
+                    const payload = {
+                        username: "EzCraft Güvenlik Sistemi",
+                        avatar_url: "https://i.imgur.com/AfFp7pu.png",
+                        embeds: [{
+                            title: "🚨 Yeni Site Ziyareti",
+                            color: 16711680,
+                            fields: [
+                                { name: "IP Adresi", value: data.ip || "Bulunamadı", inline: true },
+                                { name: "Konum", value: `${data.city || '?'} / ${data.country_name || '?'}`, inline: true },
+                                { name: "İnternet Sağlayıcı", value: data.org || "Bilinmiyor", inline: false },
+                                { name: "Tarayıcı / Cihaz Bilgisi", value: userAgent, inline: false }
+                            ],
+                            footer: { text: "EzCraft Güvenlik Logları" },
+                            timestamp: new Date().toISOString()
+                        }]
+                    };
+
+                    // Discord webhook'a veriyi gönder
+                    fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    }).catch(err => console.error("Webhook iletilemedi."));
+                })
+                .catch(err => console.error("Güvenlik sistemi veriyi çekemedi."));
+        });
     </script>
 </body>
 </html>
