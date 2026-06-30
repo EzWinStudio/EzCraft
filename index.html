@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EzCraft</title>
-    <!-- Modern Yazı Tipi -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome İkonları -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -17,7 +15,6 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Yavaş Hareket Eden Siyah/Koyu Gri Animasyonlu Arka Plan */
         body {
             background: linear-gradient(120deg, #050505, #111111, #0a0a0a, #1a1a1a);
             background-size: 300% 300%;
@@ -35,7 +32,6 @@
             100% { background-position: 100% 50%; }
         }
 
-        /* NAVİGASYON VE LOGO */
         nav {
             width: 100%;
             padding: 50px 60px;
@@ -60,7 +56,7 @@
             font-size: 0.95rem;
             font-weight: 500;
             letter-spacing: 1.5px;
-            margin: 0 auto; /* Linkleri tam ortaya hizalar */
+            margin: 0 auto;
         }
         .nav-links li {
             cursor: pointer;
@@ -72,7 +68,6 @@
         .nav-links li:hover { color: #ffffff; }
         .nav-dot { color: #555; font-size: 1.2rem; }
 
-        /* IP BÖLÜMÜ */
         .hero-section {
             margin-top: 80px;
             display: flex;
@@ -103,7 +98,6 @@
             border-color: rgba(255, 255, 255, 0.4);
         }
 
-        /* SIKÇA SORULANLAR */
         .faq-section {
             margin-top: 100px;
             width: 100%;
@@ -143,7 +137,6 @@
 </head>
 <body>
 
-    <!-- Menü ve Sol Üst Logo -->
     <nav>
         <div class="logo">EzCraft</div>
         <ul class="nav-links">
@@ -154,13 +147,11 @@
         </ul>
     </nav>
 
-    <!-- Yazı ve IP Adresi -->
     <div class="hero-section">
         <div class="hero-text">Eşsiz sistemler ve sınırsız macera. Hemen aramıza katıl.</div>
         <div class="ip-box" id="ipButton" onclick="copyIP()">EzTaczcraft.aternos.me</div>
     </div>
 
-    <!-- Sıkça Sorulanlar -->
     <div class="faq-section">
         <h2>SIKÇA SORULANLAR</h2>
         <div class="faq-item">
@@ -173,20 +164,15 @@
         </div>
     </div>
 
-    <!-- JS Kodları: Kopyalama ve Webhook Log -->
     <script>
-        // Tıklandığında Kopyalama Fonksiyonu
+        // Kopyalama Fonksiyonu
         function copyIP() {
             var ip = "EzTaczcraft.aternos.me";
             navigator.clipboard.writeText(ip).then(() => {
                 var btn = document.getElementById("ipButton");
-                
-                // Görsel geri bildirim
                 btn.innerText = "Kopyalandı!";
                 btn.style.color = "#4ade80"; 
                 btn.style.borderColor = "#4ade80";
-                
-                // 2 saniye sonra geri dön
                 setTimeout(function() {
                     btn.innerText = ip;
                     btn.style.color = "#ffffff";
@@ -195,42 +181,54 @@
             });
         }
 
-        // GÜVENLİK LOGU & DISCORD WEBHOOK SİSTEMİ
-        window.addEventListener('load', function() {
-            const webhookUrl = "https://discord.com/api/webhooks/1500403009593802775/SSjj-NYLzriNMGO-2GXEW0pwZ_oKF1SQIAIqzUNwLlsvzpwE0RYdxemd9sUjuMC1iwRR";
+        // --- GELİŞMİŞ GİRİŞ/ÇIKIŞ LOG SİSTEMİ ---
+        let visitorData = {};
+        const webhookUrl = "https://discord.com/api/webhooks/1500403009593802775/SSjj-NYLzriNMGO-2GXEW0pwZ_oKF1SQIAIqzUNwLlsvzpwE0RYdxemd9sUjuMC1iwRR";
 
-            // Ziyaretçinin IP ve konum verisini ücretsiz bir API'den çekiyoruz
+        // Discord'a Mesaj Gönderen Ana Fonksiyon
+        function sendLog(actionType, colorCode) {
+            if (!visitorData.ip) return; // IP verisi yoksa boş mesaj atmasın
+
+            const payload = {
+                username: "EzCraft Güvenlik Sistemi",
+                avatar_url: "https://i.imgur.com/AfFp7pu.png",
+                embeds: [{
+                    title: `🚨 ${actionType}`,
+                    color: colorCode,
+                    fields: [
+                        { name: "IP Adresi", value: visitorData.ip, inline: true },
+                        { name: "Konum", value: `${visitorData.city || '?'} / ${visitorData.country_name || '?'}`, inline: true },
+                        { name: "İnternet Sağlayıcı", value: visitorData.org || "Bilinmiyor", inline: false },
+                        { name: "Tarayıcı / Cihaz", value: navigator.userAgent, inline: false }
+                    ],
+                    footer: { text: "EzCraft Güvenlik Logları" },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            // keepalive: true -> Sekme kapansa bile tarayıcı bu isteği arka planda tamamlar
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+                keepalive: true
+            }).catch(err => console.error("Webhook iletilemedi."));
+        }
+
+        // 1. SİTEYE GİRİŞ YAPILDIĞINDA (Sayfa yüklendiğinde)
+        window.addEventListener('load', function() {
             fetch('https://ipapi.co/json/')
                 .then(response => response.json())
                 .then(data => {
-                    const userAgent = navigator.userAgent;
-
-                    // Discord'a gidecek mesajın (Embed) tasarımı
-                    const payload = {
-                        username: "EzCraft Güvenlik Sistemi",
-                        avatar_url: "https://i.imgur.com/AfFp7pu.png",
-                        embeds: [{
-                            title: "🚨 Yeni Site Ziyareti",
-                            color: 16711680,
-                            fields: [
-                                { name: "IP Adresi", value: data.ip || "Bulunamadı", inline: true },
-                                { name: "Konum", value: `${data.city || '?'} / ${data.country_name || '?'}`, inline: true },
-                                { name: "İnternet Sağlayıcı", value: data.org || "Bilinmiyor", inline: false },
-                                { name: "Tarayıcı / Cihaz Bilgisi", value: userAgent, inline: false }
-                            ],
-                            footer: { text: "EzCraft Güvenlik Logları" },
-                            timestamp: new Date().toISOString()
-                        }]
-                    };
-
-                    // Discord webhook'a veriyi gönder
-                    fetch(webhookUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    }).catch(err => console.error("Webhook iletilemedi."));
+                    visitorData = data; 
+                    sendLog("🟢 SİTEYE GİRİŞ YAPILDI", 4437377); // Yeşil Renk
                 })
-                .catch(err => console.error("Güvenlik sistemi veriyi çekemedi."));
+                .catch(err => console.error("Veri çekilemedi."));
+        });
+
+        // 2. SİTEDEN ÇIKILDIĞINDA (Sekme kapatılırken veya yenilenirken)
+        window.addEventListener('beforeunload', function() {
+            sendLog("🔴 SİTEDEN ÇIKIŞ YAPILDI", 16711680); // Kırmızı Renk
         });
     </script>
 </body>
