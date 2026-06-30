@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EzCraft - Modern Minecraft</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>EzCraft</title>
+    <!-- Modern Yazı Tipi -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome İkonları (Artı işareti için) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        :root {
-            --bg-card: rgba(255, 255, 255, 0.05);
-            --text-light: #ffffff;
-            --text-muted: #cccccc;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
-
-        /* SİYAH-BEYAZ ANİMASYONLU ARKA PLAN */
+        /* Siyah-Beyaz Animasyonlu Arka Plan */
         body {
-            background: linear-gradient(125deg, #000000, #222222, #000000, #333333);
+            background: linear-gradient(125deg, #0a0a0a, #1a1a1a, #050505, #222222);
             background-size: 300% 300%;
-            animation: monoGradient 10s ease infinite;
-            color: var(--text-light);
+            animation: monoGradient 12s ease infinite;
+            color: #ffffff;
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         @keyframes monoGradient {
@@ -31,72 +36,147 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* YAZI SÜSLEMELERİ */
-        h1, h2 { text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 20px rgba(255,255,255,0.2); }
-        .logo { font-size: 32px; font-weight: 900; }
-        
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 10%; backdrop-filter: blur(5px); }
-        .nav-links { display: flex; gap: 30px; font-weight: 700; color: var(--text-muted); }
-        
-        .hero { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .hero h1 { font-size: 4.5rem; margin-bottom: 20px; }
-        
-        .ip-btn {
-            background: transparent; color: white; border: 2px solid white;
-            padding: 15px 40px; font-size: 1.2rem; cursor: pointer; transition: 0.5s;
+        /* NAVİGASYON (2. Fotoğraf) */
+        nav {
+            width: 100%;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
         }
-        .ip-btn:hover { background: white; color: black; }
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            color: #eaeaea;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .nav-links li {
+            cursor: pointer;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-links li:hover { color: #ffffff; }
+        .nav-dot { color: #777; font-size: 1.2rem; }
 
-        .info-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 20px; backdrop-filter: blur(10px); }
+        /* IP BÖLÜMÜ (3. Fotoğraf) */
+        .hero-section {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .hero-text {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #f0f0f0;
+            margin-bottom: 25px;
+        }
+        .ip-box {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        .ip-box:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
 
-        /* SSS SÜSLEMELERİ */
-        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 25px 0; }
-        .faq-question { font-size: 1.3rem; font-weight: 700; display: flex; justify-content: space-between; }
-
-        footer { padding: 50px 10%; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+        /* SIKÇA SORULANLAR (1. Fotoğraf) */
+        .faq-section {
+            margin-top: 120px;
+            width: 100%;
+            max-width: 750px;
+            padding: 0 20px;
+        }
+        .faq-section h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+        .faq-item {
+            padding: 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .faq-item i {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Menü Kısmı -->
     <nav>
-        <div class="logo">EzCraft</div>
         <ul class="nav-links">
-            <li>ANA SAYFA</li>
-            <li>MAĞAZA</li>
-            <li>BLOG</li>
-            <li>WIKI</li>
+            <li><span class="nav-dot">&bull;</span> ANA SAYFA</li>
+            <li><span class="nav-dot">&bull;</span> MAĞAZA</li>
+            <li><span class="nav-dot">&bull;</span> BLOG</li>
+            <li><span class="nav-dot">&bull;</span> WIKI</li>
         </ul>
     </nav>
 
-    <header class="hero">
-        <h1>GELECEĞİN<br>KRALLIĞINI KUR</h1>
-        <p>Eşsiz sistemler ve sınırsız macera. Hemen aramıza katıl.</p>
-        <br>
-        <button class="ip-btn" onclick="navigator.clipboard.writeText('EzTaczcraft.aternos.me')">
-            EzTaczcraft.aternos.me
-        </button>
-    </header>
+    <!-- Yazı ve IP Adresi Kısmı -->
+    <div class="hero-section">
+        <div class="hero-text">Eşsiz sistemler ve sınırsız macera. Hemen aramıza katıl.</div>
+        <div class="ip-box" id="ipButton" onclick="copyIP()">EzTaczcraft.aternos.me</div>
+    </div>
 
-    <section style="padding: 50px 10%;">
-        <div class="info-card">
-            <h2>Sunucu Durumu</h2>
-            <p>128 Aktif Oyuncu Çevrimiçi</p>
-        </div>
-    </section>
-
-    <section style="padding: 50px 10%;">
+    <!-- Sıkça Sorulanlar Kısmı -->
+    <div class="faq-section">
         <h2>SIKÇA SORULANLAR</h2>
         <div class="faq-item">
-            <div class="faq-question">Nasıl giriş yaparım? <i class="fa-solid fa-plus"></i></div>
+            <div class="faq-question">Nasıl giriş yaparım?</div>
+            <i class="fa-solid fa-plus"></i>
         </div>
         <div class="faq-item">
-            <div class="faq-question">Destek nereden alınır? <i class="fa-solid fa-plus"></i></div>
+            <div class="faq-question">Destek nereden alınır?</div>
+            <i class="fa-solid fa-plus"></i>
         </div>
-    </section>
+    </div>
 
-    <footer>
-        <p>&copy; 2026 EzCraft - Tüm Hakları Saklıdır.</p>
-    </footer>
-
+    <!-- Tıklandığında Kopyalama Kodu -->
+    <script>
+        function copyIP() {
+            var ip = "EzTaczcraft.aternos.me";
+            navigator.clipboard.writeText(ip).then(() => {
+                var btn = document.getElementById("ipButton");
+                
+                // Tıklandığında görsel geri bildirim
+                btn.innerText = "Kopyalandı!";
+                btn.style.color = "#4ade80"; // Açık yeşil renk
+                btn.style.borderColor = "#4ade80";
+                
+                // 2 saniye sonra eski haline dönmesi
+                setTimeout(function() {
+                    btn.innerText = ip;
+                    btn.style.color = "#ffffff";
+                    btn.style.borderColor = "rgba(255, 255, 255, 0.2)";
+                }, 2000);
+            }).catch(err => {
+                console.error('Kopyalama başarısız oldu', err);
+            });
+        }
+    </script>
 </body>
 </html>
