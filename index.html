@@ -6,7 +6,7 @@
     <title>EzCraft</title>
     <!-- Modern Yazı Tipi -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome İkonları (Artı işareti için) -->
+    <!-- Font Awesome İkonları -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -17,11 +17,11 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Siyah-Beyaz Animasyonlu Arka Plan */
+        /* Yavaş Hareket Eden Siyah/Koyu Gri Animasyonlu Arka Plan */
         body {
-            background: linear-gradient(125deg, #0a0a0a, #1a1a1a, #050505, #222222);
+            background: linear-gradient(120deg, #050505, #111111, #0a0a0a, #1a1a1a);
             background-size: 300% 300%;
-            animation: monoGradient 12s ease infinite;
+            animation: slowPan 15s ease-in-out infinite alternate;
             color: #ffffff;
             line-height: 1.6;
             min-height: 100vh;
@@ -30,41 +30,51 @@
             align-items: center;
         }
 
-        @keyframes monoGradient {
+        @keyframes slowPan {
             0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
-        /* NAVİGASYON (2. Fotoğraf) */
+        /* NAVİGASYON VE LOGO */
         nav {
             width: 100%;
-            padding: 60px 20px;
+            padding: 50px 60px;
             display: flex;
-            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .logo {
+            position: absolute;
+            left: 60px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-transform: uppercase;
         }
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 30px;
             list-style: none;
             color: #eaeaea;
-            font-size: 1.1rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            margin: 0 auto; /* Linkleri tam ortaya hizalar */
         }
         .nav-links li {
             cursor: pointer;
             transition: color 0.3s;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         .nav-links li:hover { color: #ffffff; }
-        .nav-dot { color: #777; font-size: 1.2rem; }
+        .nav-dot { color: #555; font-size: 1.2rem; }
 
-        /* IP BÖLÜMÜ (3. Fotoğraf) */
+        /* IP BÖLÜMÜ */
         .hero-section {
-            margin-top: 60px;
+            margin-top: 80px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -74,36 +84,38 @@
             font-size: 1.1rem;
             font-weight: 400;
             color: #f0f0f0;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
         }
         .ip-box {
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 15px 40px;
-            font-size: 1.3rem;
+            padding: 16px 45px;
+            font-size: 1.2rem;
             font-weight: 400;
             color: #ffffff;
             cursor: pointer;
             transition: all 0.3s ease;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
         .ip-box:hover {
             background: rgba(255, 255, 255, 0.05);
             border-color: rgba(255, 255, 255, 0.4);
         }
 
-        /* SIKÇA SORULANLAR (1. Fotoğraf) */
+        /* SIKÇA SORULANLAR (Fotoğraftaki Süslemesiz ve Sade Hal) */
         .faq-section {
-            margin-top: 120px;
+            margin-top: 100px;
             width: 100%;
-            max-width: 750px;
+            max-width: 800px;
             padding: 0 20px;
         }
         .faq-section h2 {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
+            letter-spacing: 3px;
+            margin-bottom: 50px;
+            color: #ffffff;
         }
         .faq-item {
             padding: 25px 0;
@@ -111,14 +123,19 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            transition: 0.2s;
+            transition: opacity 0.2s;
+        }
+        .faq-item:hover {
+            opacity: 0.8;
         }
         .faq-question {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: #ffffff;
+            letter-spacing: 0.5px;
         }
         .faq-item i {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 300;
             color: #ffffff;
         }
@@ -126,8 +143,9 @@
 </head>
 <body>
 
-    <!-- Menü Kısmı -->
+    <!-- Menü ve Sol Üst Logo -->
     <nav>
+        <div class="logo">EzCraft</div>
         <ul class="nav-links">
             <li><span class="nav-dot">&bull;</span> ANA SAYFA</li>
             <li><span class="nav-dot">&bull;</span> MAĞAZA</li>
@@ -136,13 +154,13 @@
         </ul>
     </nav>
 
-    <!-- Yazı ve IP Adresi Kısmı -->
+    <!-- Yazı ve IP Adresi -->
     <div class="hero-section">
         <div class="hero-text">Eşsiz sistemler ve sınırsız macera. Hemen aramıza katıl.</div>
         <div class="ip-box" id="ipButton" onclick="copyIP()">EzTaczcraft.aternos.me</div>
     </div>
 
-    <!-- Sıkça Sorulanlar Kısmı -->
+    <!-- Sıkça Sorulanlar (Sadeleştirildi) -->
     <div class="faq-section">
         <h2>SIKÇA SORULANLAR</h2>
         <div class="faq-item">
@@ -155,26 +173,24 @@
         </div>
     </div>
 
-    <!-- Tıklandığında Kopyalama Kodu -->
+    <!-- Tıklandığında Kopyalama Fonksiyonu -->
     <script>
         function copyIP() {
             var ip = "EzTaczcraft.aternos.me";
             navigator.clipboard.writeText(ip).then(() => {
                 var btn = document.getElementById("ipButton");
                 
-                // Tıklandığında görsel geri bildirim
+                // Görsel geri bildirim
                 btn.innerText = "Kopyalandı!";
-                btn.style.color = "#4ade80"; // Açık yeşil renk
+                btn.style.color = "#4ade80"; 
                 btn.style.borderColor = "#4ade80";
                 
-                // 2 saniye sonra eski haline dönmesi
+                // 2 saniye sonra geri dön
                 setTimeout(function() {
                     btn.innerText = ip;
                     btn.style.color = "#ffffff";
                     btn.style.borderColor = "rgba(255, 255, 255, 0.2)";
                 }, 2000);
-            }).catch(err => {
-                console.error('Kopyalama başarısız oldu', err);
             });
         }
     </script>
